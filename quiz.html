@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OtterDen | Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main-wrapper">
+
+        <nav class="navbar">
+            <div class="logo">Otter Den</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="education.html">Otter Information</a></li>
+                <li><a href="quiz.html" class="active">Otter Quiz</a></li>
+            </ul>
+        </nav>
+
+        <main class="container">
+            <h1>Test Your Otter Knowledge!</h1>
+            <p>See how much you remember from our Otter Information page.</p>
+            
+            <div class="quiz-box">
+                <div class="quiz-question">
+                    <h3>1. What do otters use to act as a rudder while swimming?</h3>
+                    <label><input type="radio" name="q1" value="wrong"> Their webbed feet</label><br>
+                    <label><input type="radio" name="q1" value="correct"> Their powerful tails</label><br>
+                    <label><input type="radio" name="q1" value="wrong"> Their thick whiskers</label>
+                </div>
+
+                <div class="quiz-question">
+                    <h3>2. Where do Sea Otters specifically love to float?</h3>
+                    <label><input type="radio" name="q2" value="wrong"> Muddy river banks</label><br>
+                    <label><input type="radio" name="q2" value="wrong"> Freshwater wetlands</label><br>
+                    <label><input type="radio" name="q2" value="correct"> Giant marine kelp forests</label>
+                </div>
+
+                <div class="quiz-question">
+                    <h3>3. How long can the Giant River Otter of South America grow?</h3>
+                    <label><input type="radio" name="q3" value="correct"> Up to 6 feet long</label><br>
+                    <label><input type="radio" name="q3" value="wrong"> Up to 3 feet long</label><br>
+                    <label><input type="radio" name="q3" value="wrong"> Up to 10 feet long</label>
+                </div>
+
+                <div class="quiz-question">
+                    <h3>4. On which two continents can you NOT find wild otters?</h3>
+                    <label><input type="radio" name="q4" value="wrong"> Africa and Europe</label><br>
+                    <label><input type="radio" name="q4" value="correct"> Australia and Antarctica</label><br>
+                    <label><input type="radio" name="q4" value="wrong"> North America and South America</label>
+                </div>
+
+                <div class="quiz-question">
+                    <h3>5. What tool do sea otters famously use to crack open stubborn shells?</h3>
+                    <label><input type="radio" name="q5" value="wrong"> Sharp pieces of coral</label><br>
+                    <label><input type="radio" name="q5" value="wrong"> Large sticks</label><br>
+                    <label><input type="radio" name="q5" value="correct"> Favorite rocks</label>
+                </div>
+
+                <button class="quiz-btn" onclick="submitQuiz()">Submit Answers</button>
+            </div>
+
+            <div id="quiz-result" class="result-box"></div>
+        </main>
+
+    </div> 
+
+    <script>
+        function submitQuiz() {
+            let score = 0;
+            const totalQuestions = 5;
+
+            // Loop through each question to see if the checked option has value="correct"
+            for (let i = 1; i <= totalQuestions; i++) {
+                const answer = document.querySelector(`input[name="q${i}"]:checked`);
+                if (answer && answer.value === "correct") {
+                    score++;
+                }
+            }
+
+            // Generate customized feedback message based on score
+            const resultDiv = document.getElementById('quiz-result');
+            let feedback = "";
+
+            if (score === totalQuestions) {
+                feedback = `<h3>Perfect Score! ${score}/${totalQuestions}</h3><p>You're an official Otter Expert! Excellent job reading the facts.</p>`;
+                resultDiv.style.backgroundColor = "#e3faf2"; // Soft mint green
+            } else if (score >= 3) {
+                feedback = `<h3>Great Job! ${score}/${totalQuestions}</h3><p>You know your stuff, but you missed a couple. Re-read the information page to get a perfect score!</p>`;
+                resultDiv.style.backgroundColor = "#e8f4fd"; // Soft blue
+            } else {
+                feedback = `<h3>Keep Swimming! ${score}/${totalQuestions}</h3><p>Try reading the Otter Information page again to discover more about these amazing animals!</p>`;
+                resultDiv.style.backgroundColor = "#ffebe6"; // Soft red/pink
+            }
+
+            resultDiv.innerHTML = feedback;
+            resultDiv.style.display = "block";
+            
+            // Smoothly scroll down to the results box
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
